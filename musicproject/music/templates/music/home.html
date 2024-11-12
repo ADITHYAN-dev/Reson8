@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Search</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7fa;
+            font-family: 'Roboto', sans-serif;
+        }
+        .navbar {
+            background-color: #007bff;
+        }
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #fff;
+        }
+        .navbar form {
+            display: flex;
+            justify-content: center;
+            flex: 1;
+        }
+        .navbar form input[type="text"] {
+            width: 60%;
+            padding: 8px;
+            border-radius: 4px;
+            border: none;
+            font-size: 1rem;
+        }
+        .navbar form button {
+            border: none;
+            background-color: #fff;
+            padding: 8px 15px;
+            border-radius: 4px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .container {
+            padding: 20px;
+        }
+        .track-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 40px;
+        }
+        .track-list li {
+            background-color: #fff;
+            margin-bottom: 15px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .no-results {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #888;
+            margin-top: 30px;
+        }
+        .history-btn {
+            margin-top: 20px;
+            background-color: #28a745;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .history-btn:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar with Logo and Professionally Aligned Search Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">RESON8</a>
+        <div class="collapse navbar-collapse">
+            <form method="POST" class="form-inline ml-auto">
+                {% csrf_token %}
+                <input type="text" name="track_name" class="form-control mr-2" placeholder="Search for a track" required>
+                <button type="submit" class="btn btn-light">Search</button>
+            </form>
+            <!-- Add Search History button in the Navbar -->
+            <a href="{% url 'search_history' %}" class="btn btn-light ml-3">Search History</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        {% if tracks %}
+            <h2>Search Results:</h2>
+            <ul class="track-list">
+                {% for track in tracks %}
+                    <li>
+                        <strong>{{ track.name }}</strong> by {{ track.artist }}
+                        <br>
+                        <a href="{{ track.url }}" target="_blank">Listen on Last.fm</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p class="no-results">No tracks found. Please try again.</p>
+        {% endif %}
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

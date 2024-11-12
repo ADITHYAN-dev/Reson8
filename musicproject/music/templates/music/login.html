@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Login Page</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #ffffff; /* Solid white background */
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        form {
+            height: 450px; /* Adjusted height */
+            width: 400px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
+            padding: 40px;
+            z-index: 1;
+        }
+
+        h3 {
+            font-size: 28px;
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+
+        input {
+            display: block;
+            height: 45px;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: 5px;
+            padding: 0 10px;
+            margin-top: 8px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        ::placeholder {
+            color: #aaa;
+        }
+
+        button {
+            margin-top: 30px;
+            width: 100%;
+            background-color: #1845ad;
+            color: #ffffff;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #23a2f6;
+        }
+
+        #alert {
+            color: red;
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 15px; /* Reduced margin for better spacing */
+            color: #1845ad;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <form method="post">
+        <h3>Login Here</h3>
+        {% csrf_token %}
+        <label for="username">Username</label>
+        <input type="text" placeholder="Enter Username" id="username" name="username">
+
+        <label for="password">Password</label>
+        <input type="password" placeholder="Enter Password" id="password" name="pass">
+
+        <p id="alert">
+            {% if messages %}
+                {% for msg in messages %}
+                    {{ msg }}
+                {% endfor %}
+            {% endif %}
+        </p>
+
+        <button type="submit">Log In</button>
+
+        <a href="{% url 'signupPage' %}">Create an account</a>
+    </form>
+</body>
+
+</html>

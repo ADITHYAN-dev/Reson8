@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Page</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #f4f4f9;
+            font-family: 'Poppins', sans-serif;
+        }
+        .background {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .shape {
+            height: 200px;
+            width: 200px;
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+        }
+        .shape:first-child {
+            background: linear-gradient(#6a5acd, #00bfff);
+            left: -100px;
+            top: -100px;
+        }
+        .shape:last-child {
+            background: linear-gradient(to right, #ff7f50, #ff6347);
+            right: -80px;
+            bottom: -100px;
+        }
+        form {
+            max-width: 450px;
+            background-color: rgba(255, 255, 255, 0.9);
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+            border-radius: 10px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            padding: 40px 35px;
+        }
+        h3 {
+            font-size: 28px;
+            font-weight: 600;
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #555;
+        }
+        input {
+            display: block;
+            height: 50px;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.05);
+            border-radius: 5px;
+            padding: 0 10px;
+            margin-top: 8px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+        }
+        input::placeholder {
+            color: #999;
+        }
+        button {
+            margin-top: 20px;
+            width: 100%;
+            background-color: #1845ad;
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #23a2f6;
+        }
+        #alert {
+            color: red;
+            margin-top: 10px;
+            text-align: center;
+        }
+        a {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #6a5acd;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    <form action="" method="post">
+        {% csrf_token %}
+        <h3>Signup Here</h3>
+
+        <label for="username">Username</label>
+        <input type="text" placeholder="Username" name="username" id="username" required>
+
+        <label for="email">Email</label>
+        <input type="email" placeholder="Email" name="email" id="email" required>
+
+        <label for="password1">Password</label>
+        <input type="password" placeholder="Password" id="password1" name="password1" required>
+
+        <label for="password2">Confirm Password</label>
+        <input type="password" placeholder="Confirm Password" id="password2" name="password2" required>
+
+        <p id="alert">
+            {% if messages %}
+            {% for msg in messages %}
+                {{ msg }}
+            {% endfor %}
+            {% endif %}
+        </p>
+        <button type="submit">Signup</button>
+        
+        <a href="{% url 'loginPage' %}">I already have an account</a>
+    </form>
+</body>
+</html>
